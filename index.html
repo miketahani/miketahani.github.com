@@ -15,6 +15,13 @@
         padding: 0;
       }
 
+      #threed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
       a {
         color: steelblue;
         text-decoration: none;
@@ -41,8 +48,68 @@
       </p>
     </div>
 
-    <!-- <script src='js/d3.v3.js'></script> -->
+    <div id='threed'></div>
+
+    <script src='js/d3.v3.js'></script>
+    <script src='js/three.r65.js'></script>
     <script>
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+      
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0xffffff);
+      document.getElementById('threed').appendChild(renderer.domElement);
+      
+      // var geometry = new THREE.CubeGeometry(1,1,1);
+      var geometry = new THREE.IcosahedronGeometry();
+      var material = new THREE.MeshBasicMaterial({color: 0xaaaaaa, wireframe: true});
+      var cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+
+      var geometry = new THREE.IcosahedronGeometry(2.5);
+      var material = new THREE.MeshBasicMaterial({
+        color: 0x000000, 
+        wireframe: true, 
+        transparent: true, 
+        opacity: 0.3,
+      });
+      var cubeOutline = new THREE.Mesh(geometry, material);
+      cubeOutline.userData.velocity = 0.1;
+      cubeOutline.userData.opacity = 0.1;
+
+      
+      camera.position.z = 5;
+      
+      var render = function () {
+        requestAnimationFrame(render);
+      
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        cubeOutline.rotation.x -= 0.01;
+        cubeOutline.rotation.y -= 0.01;
+
+        renderer.render(scene, camera);
+      };
+      
+      render();
+
+      d3.select('body')
+        .selectAll('a')
+          .on('mouseover', function() {
+            // cube.scale.set(2, 2, 2);
+            cube.material.color.setHSL(Math.random(), 1.0, 0.65);
+            cube.material.wireframe = false;
+            scene.add(cubeOutline);
+          })
+          .on('mouseout', function() {
+            scene.remove(cubeOutline);
+            // cube.scale.set(1, 1, 1);
+            cube.material.wireframe = true;
+            // scene.remove(cubes);
+          });
 
     </script>
 
