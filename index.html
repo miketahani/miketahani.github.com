@@ -22,13 +22,18 @@
         z-index: -1;
       }
 
-      a {
+      a, a:visited {
         color: steelblue;
         text-decoration: none;
       }
 
       #header {
         font-size: 2em;
+      }
+
+      .smaller {
+        font-size: 0.7em;
+        padding-top: 20px;
       }
 
     </style>
@@ -44,7 +49,11 @@
       <p>
         <a href='http://datahacker.tumblr.com'>Portfolio</a><br>
         <a href='http://github.com/miketahani'>Github</a><br>
-        <a href='http://twitter.com/mtahani'>Twitter</a>
+        <a href='http://twitter.com/mtahani'>Twitter</a><br>
+      </p>
+
+      <p class='smaller'>
+        me@miketahani.com
       </p>
     </div>
 
@@ -62,11 +71,15 @@
       renderer.setClearColor(0xffffff);
       document.getElementById('threed').appendChild(renderer.domElement);
       
-      // var geometry = new THREE.CubeGeometry(1,1,1);
       var geometry = new THREE.IcosahedronGeometry();
-      var material = new THREE.MeshBasicMaterial({color: 0xaaaaaa, wireframe: true});
-      var cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
+      var material = new THREE.MeshBasicMaterial({
+        color: 0xaaaaaa, 
+        wireframe: true 
+        // transparent: true, 
+        // opacity: 0.5
+      });
+      var inner = new THREE.Mesh(geometry, material);
+      scene.add(inner);
 
       var geometry = new THREE.IcosahedronGeometry(2.5);
       var material = new THREE.MeshBasicMaterial({
@@ -75,10 +88,10 @@
         transparent: true, 
         opacity: 0.3,
       });
-      var cubeOutline = new THREE.Mesh(geometry, material);
-      cubeOutline.userData.velocity = 0.1;
-      cubeOutline.userData.opacity = 0.1;
-      scene.add(cubeOutline);
+      var outer = new THREE.Mesh(geometry, material);
+      outer.userData.velocity = 0.1;
+      outer.userData.opacity = 0.1;
+      scene.add(outer);
 
       
       camera.position.z = 5;
@@ -86,11 +99,11 @@
       var render = function () {
         requestAnimationFrame(render);
       
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        inner.rotation.x += 0.01;
+        inner.rotation.y += 0.01;
 
-        cubeOutline.rotation.x -= 0.005;
-        cubeOutline.rotation.y -= 0.005;
+        outer.rotation.x -= 0.005;
+        outer.rotation.y -= 0.005;
 
         renderer.render(scene, camera);
       };
@@ -99,51 +112,59 @@
 
       var expandOuter,
           innerToWireframe,
-          v = 0.01;
+          v = 0.02,
+          scale = 1;
 
-      d3.select('body')
-        .selectAll('a')
-          .on('mouseover', function() {
-            window.clearInterval(expandOuter);
-            if (innerToWireframe)
-              window.clearTimeout(innerToWireframe);
+      var a = d3.select('body')
+        .selectAll('a');
 
-            // cube.scale.set(2, 2, 2);
-            cube.material.color.setHSL(Math.random(), 1.0, 0.65);
-            cube.material.wireframe = false;
-            // scene.add(cubeOutline);
-            expandOuter = window.setInterval(function() {
-              if (cubeOutline.material.opacity < 1) {
-                cubeOutline.material.opacity += v;
-                var scale = cubeOutline.material.opacity + 1;
-                cubeOutline.scale.set(scale, scale, scale);
-              }
-              else
-                window.clearInterval(expandOuter);
-            }, 0);
-          })
-          .on('mouseout', function() {
-            innerToWireframe = window.setTimeout(function() {
-              
-              cube.material.wireframe = true;
+       a 
+        .on('mouseover', function() {
+          window.clearInterval(expandOuter);
+          if (innerToWireframe)
+            window.clearTimeout(innerToWireframe);
 
+          var hue = Math.random();
+
+          inner.material.color.setHSL(hue, 1.0, 0.65);
+          inner.material.wireframe = false;
+
+          var color = 'hsl(' + hue * 360 + ', 100%, 65%)';
+
+          d3.select(this).style('color', color);
+
+          expandOuter = window.setInterval(function() {
+            if (scale < 2) {
+              scale += v;
+            }
+            else {
               window.clearInterval(expandOuter);
-              expandOuter = window.setInterval(function() {
-                if (cubeOutline.material.opacity > 0.3) {
-                  cubeOutline.material.opacity -= v;
-                  var scale = cubeOutline.material.opacity + 1;
-                  cubeOutline.scale.set(scale, scale, scale);
-                }
-                else {
-                  // scene.remove(cubeOutline);
-                  cubeOutline.material.opacity = 0.3;
-                  cubeOutline.scale.set(1, 1, 1);
-                  window.clearInterval(expandOuter);
-                }
-              }, 0);
+              scale = 2;
+            }
+            outer.scale.set(scale, scale, scale);
+          }, 0);
+        })
+        .on('mouseout', function() {
+          d3.select(this).style('color', 'steelblue');
 
-            }, 200);
-          });
+          innerToWireframe = window.setTimeout(function() {
+            
+            inner.material.wireframe = true;
+
+            window.clearInterval(expandOuter);
+            expandOuter = window.setInterval(function() {
+              if (scale > 1) {
+                scale -= v;
+              }
+              else {
+                scale = 1;
+                window.clearInterval(expandOuter);
+              }
+              outer.scale.set(scale, scale, scale);
+            }, 0);
+
+          }, 200);
+        });
 
     </script>
 
