@@ -8,6 +8,8 @@
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         font-size: 1.5em;
         margin: 20px;
+        /*background: url('img/dot.gif');*/
+        /*background-repeat: repeat;*/
       }
 
       svg {
@@ -75,16 +77,16 @@
     <script>
 
       var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
       
-      var renderer = new THREE.WebGLRenderer();
+      var renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff);
       document.getElementById('threed').appendChild(renderer.domElement);
       
       var geometry = new THREE.IcosahedronGeometry();
       var material = new THREE.MeshBasicMaterial({
-        color: 0xaaaaaa, 
+        color: 0x000000, 
         wireframe: true 
         // transparent: true, 
         // opacity: 0.5
@@ -95,9 +97,9 @@
       var geometry = new THREE.IcosahedronGeometry(2.5);
       var material = new THREE.MeshBasicMaterial({
         color: 0x000000, 
-        wireframe: true, 
-        transparent: true, 
-        opacity: 0.3,
+        wireframe: true
+        // transparent: true, 
+        // opacity: 0.3,
       });
       var outer = new THREE.Mesh(geometry, material);
       outer.userData.velocity = 0.1;
@@ -160,6 +162,7 @@
 
           innerToWireframe = window.setTimeout(function() {
             
+            inner.material.color = new THREE.Color(0x000000);
             inner.material.wireframe = true;
 
             window.clearInterval(expandOuter);
@@ -174,7 +177,7 @@
               outer.scale.set(scale, scale, scale);
             }, 0);
 
-          }, 200);
+          }, 100);
         });
 
     </script>
