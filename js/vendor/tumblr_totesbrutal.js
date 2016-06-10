@@ -62,8 +62,6 @@ jQuery Masonry
 Disassemble 3.0
 */
 
-var PAGE = {CurrentPage};
-
 $(function(){
   var $container = $('#wrapper');
     $container.imagesLoaded(function () {
