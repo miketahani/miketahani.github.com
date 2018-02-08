@@ -2,45 +2,57 @@
 <html>
   <head>
     <meta charset='utf-8'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>mike tahani</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <style>
-
-      @font-face {
-        font-family: 'inconsolata';
-        src: url('fonts/inconsolata.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-      }
-
       body {
         margin: 0;
         padding: 0;
-
-        font-family: 'inconsolata';
+        font-family: Helvetica, Arial, sans-serif;
       }
 
-      a {
-        color: #000;
+      #root {
+        margin: 1em;
       }
 
+      div.section {
+        margin: 1em;
+      }
 
+      h1 {
+        margin-bottom: 0;
+      }
+
+      a, a:visited {
+        color: black;
+      }
+
+      a:hover {
+        color: steelblue;
+        transition: color 0.1s ease-in;
+      }
+
+      span {
+        padding-right: 0.25em;
+      }
+
+      span.fab {
+        font-size: 2em;
+      }
     </style>
   </head>
   <body>
-
     <div id='root'>
+      <div class='section'>
+        <h1>Mike Tahani</h1>
+        <span>me 🌀miketahani.com</span>
+      </div>
 
-      <p>
-        <h2>mike tahani</h2>
-      </p>
-
+      <div class='section'>
+        <a href='https://blog.miketahani.com'><span class='fab fa-tumblr'></span></a>
+        <a href='https://github.com/miketahani'><span class='fab fa-github'></span></a>
+        <a href='https://www.linkedin.com/in/miketahani/'><span class='fab fa-linkedin-in'></span></a>
+        <a href='https://twitter.com/miketahani'><span class='fab fa-twitter'></span></a>
+      </div>
     </div>
-
-    <script>
-
-
-    </script>
-
   </body>
 </html>
