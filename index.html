@@ -22,13 +22,23 @@
         margin-bottom: 0;
       }
 
+      a {
+        text-decoration: none;
+        border-bottom: 1px solid #000;
+      }
+
+      .section.icons a {
+        border: none;
+      }
+
       a, a:visited {
         color: black;
       }
 
       a:hover {
         color: steelblue;
-        transition: color 0.1s ease-in;
+        border-color: steelblue;
+        transition: color 0.1s ease-in, border-color 0.1s ease-in;
       }
 
       span {
@@ -48,6 +58,10 @@
       </div>
 
       <div class='section'>
+        <a href='https://beta.observablehq.com/@miketahani'>Observable notebooks <span class='fas fa-external-link-alt'></span>
+      </div>
+
+      <div class='section icons'>
         <a href='https://blog.miketahani.com'><span class='fab fa-tumblr'></span></a>
         <a href='https://github.com/miketahani'><span class='fab fa-github'></span></a>
         <a href='https://www.linkedin.com/in/miketahani/'><span class='fab fa-linkedin-in'></span></a>
