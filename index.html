@@ -12,7 +12,7 @@
 |__/     \__/|__/  |__/|__/  |__/|__/  \__/|______/|__/  \__/ \______/
 
 You're looking at a version of my site from 2014. I have yet to update the code behind this so it's full of hacks.
-Check out my links to Github and Observable for somewhat-more-recent code examples
+Check out my links to Github and Observable for (somewhat) more recent (and less memory-leaky) code examples.
 -->
 <html>
   <head>
@@ -25,13 +25,6 @@ Check out my links to Github and Observable for somewhat-more-recent code exampl
         font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
         font-size: 1.5em;
         margin: 20px;
-        /*background: url('img/dot.gif');*/
-        /*background-repeat: repeat;*/
-      }
-
-      svg {
-        margin: 0;
-        padding: 0;
       }
 
       #threed {
@@ -50,11 +43,6 @@ Check out my links to Github and Observable for somewhat-more-recent code exampl
         background: #000;
         color: #fff;
         line-height: 1.3em;
-      }
-
-      a:hover {
-        /*padding: 0 10px 0 20px;*/
-        /*background: #000;*/
       }
 
       a:hover:before,
@@ -101,7 +89,7 @@ Check out my links to Github and Observable for somewhat-more-recent code exampl
     <div id='threed'></div>
 
     <script src='js/d3.v3.js'></script>
-    <script src='js/three.r67.min.js'></script>
+    <script src='js/vendor/three.r91.min.js'></script>
     <script>
 
       var scene = new THREE.Scene()
@@ -116,8 +104,6 @@ Check out my links to Github and Observable for somewhat-more-recent code exampl
       var material = new THREE.MeshBasicMaterial({
         color: 0x000000,
         wireframe: true
-        // transparent: true,
-        // opacity: 0.5
       })
       var inner = new THREE.Mesh(geometry, material)
       scene.add(inner)
@@ -126,8 +112,6 @@ Check out my links to Github and Observable for somewhat-more-recent code exampl
       var material = new THREE.MeshBasicMaterial({
         color: 0x000000,
         wireframe: true
-        // transparent: true,
-        // opacity: 0.3,
       })
       var outer = new THREE.Mesh(geometry, material)
       outer.userData.velocity = 0.1
@@ -156,8 +140,27 @@ Check out my links to Github and Observable for somewhat-more-recent code exampl
           v = 0.02,
           scale = 1;
 
-       d3.selectAll('div#links > a')
-        .on('mouseover', function() {
+      function expandScale () {
+        if (scale < 2) {
+          scale += v
+        } else {
+          window.clearInterval(expandOuter)
+          scale = 2
+        }
+      }
+
+      function contractScale () {
+        if (scale > 1) {
+          scale -= v
+        }
+        else {
+          window.clearInterval(expandOuter)
+          scale = 1
+        }
+      }
+
+      d3.selectAll('div#links > a')
+        .on('mouseover', function () {
           window.clearInterval(expandOuter)
 
           if (innerToWireframe) {
@@ -171,37 +174,25 @@ Check out my links to Github and Observable for somewhat-more-recent code exampl
 
           const color = `hsl(${hue * 360}, 100%, 65%)`
 
-          d3.select(this).style('color', color)
+          this.style.color = color
 
-          expandOuter = window.setInterval(function() {
-            if (scale < 2) {
-              scale += v
-            }
-            else {
-              window.clearInterval(expandOuter)
-              scale = 2
-            }
+          expandOuter = window.setInterval(function () {
+            expandScale()
             outer.scale.set(scale, scale, scale)
           }, 0)
         })
         .on('mouseout', function() {
-          d3.select(this).style('color', 'white')
+          this.style.color = '#fff'
 
-          innerToWireframe = window.setTimeout(function() {
-
-            inner.material.color = new THREE.Color(0x000000)
+          innerToWireframe = window.setTimeout(function () {
+            inner.material.color.set(0x000000)
             inner.material.wireframe = true
 
             window.clearInterval(expandOuter)
-            expandOuter = window.setInterval(function() {
-              if (scale > 1) {
-                scale -= v
-              }
-              else {
-                scale = 1
-                window.clearInterval(expandOuter);
-              }
-              outer.scale.set(scale, scale, scale);
+
+            expandOuter = window.setInterval(function () {
+              contractScale()
+              outer.scale.set(scale, scale, scale)
             }, 0)
 
           }, 100)
