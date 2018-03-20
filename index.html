@@ -135,8 +135,8 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
 
       render()
 
-      var expandOuter,
-          innerToWireframe,
+      var expandOuterInterval,
+          innerToWireframeTimeout,
           v = 0.02,
           scale = 1;
 
@@ -159,12 +159,30 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
         }
       }
 
+      function expandOuter () {
+        expandScale()
+        outer.scale.set(scale, scale, scale)
+      }
+
+      function contractOuter () {
+        contractScale()
+        outer.scale.set(scale, scale, scale)
+      }
+
+      function innerToWireframe () {
+        inner.material.color.set(0x000000)
+        inner.material.wireframe = true
+
+        window.clearInterval(expandOuterInterval)
+        expandOuterInterval = window.setInterval(contractOuter, 0)
+      }
+
       d3.selectAll('div#links > a')
         .on('mouseover', function () {
-          window.clearInterval(expandOuter)
+          window.clearInterval(expandOuterInterval)
 
-          if (innerToWireframe) {
-            window.clearTimeout(innerToWireframe)
+          if (innerToWireframeTimeout) {
+            window.clearTimeout(innerToWireframeTimeout)
           }
 
           const hue = Math.random()
@@ -172,30 +190,13 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
           inner.material.color.setHSL(hue, 1.0, 0.65)
           inner.material.wireframe = false
 
-          const color = `hsl(${hue * 360}, 100%, 65%)`
+          this.style.color = `hsl(${hue * 360}, 100%, 65%)`
 
-          this.style.color = color
-
-          expandOuter = window.setInterval(function () {
-            expandScale()
-            outer.scale.set(scale, scale, scale)
-          }, 0)
+          expandOuterInterval = window.setInterval(expandOuter, 0)
         })
         .on('mouseout', function() {
           this.style.color = '#fff'
-
-          innerToWireframe = window.setTimeout(function () {
-            inner.material.color.set(0x000000)
-            inner.material.wireframe = true
-
-            window.clearInterval(expandOuter)
-
-            expandOuter = window.setInterval(function () {
-              contractScale()
-              outer.scale.set(scale, scale, scale)
-            }, 0)
-
-          }, 100)
+          innerToWireframeTimeout = window.setTimeout(innerToWireframe, 100)
         })
 
     </script>
