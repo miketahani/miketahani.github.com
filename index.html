@@ -82,7 +82,7 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
       </div>
 
       <div class='smaller'>
-        👋🏼 me at miketahani dot com
+        say hi: me at miketahani dot com
       </div>
     </div>
 
@@ -108,7 +108,7 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
       var inner = new THREE.Mesh(geometry, material)
       scene.add(inner)
 
-      var geometry = new THREE.IcosahedronGeometry(2.5)
+      var geometry = new THREE.IcosahedronGeometry(Math.round((window.innerWidth / 768) * 10) / 10)
       var material = new THREE.MeshBasicMaterial({
         color: 0x000000,
         wireframe: true
