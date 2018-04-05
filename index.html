@@ -71,7 +71,7 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
       <div id='header'>
         Mike Tahani
       </div>
-      Creative Technologist
+      Creative Technologist 💡
 
       <div id='links'>
         <a href='https://blog.miketahani.com'>Portfolio</a><br>
@@ -82,7 +82,7 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
       </div>
 
       <div class='smaller'>
-        say hi: me at miketahani dot com
+        👋🏼 me at miketahani dot com
       </div>
     </div>
 
@@ -93,7 +93,7 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
     <script>
 
       var scene = new THREE.Scene()
-      var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000)
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 100)
 
       var renderer = new THREE.WebGLRenderer({antialias: true, alpha: true})
       renderer.setSize(window.innerWidth, window.innerHeight)
@@ -114,8 +114,6 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
         wireframe: true
       })
       var outer = new THREE.Mesh(geometry, material)
-      outer.userData.velocity = 0.1
-      outer.userData.opacity = 0.1
       scene.add(outer)
 
 
