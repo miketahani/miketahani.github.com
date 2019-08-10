@@ -20,6 +20,10 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
     <title>mike tahani</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet'>
     <style>
+      *{
+        box-sizing: border-box;
+      }
+
 
       body {
         font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
@@ -45,9 +49,15 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
         line-height: 1.3em;
       }
 
+      @keyframes fade-in {
+        from { opacity: 0.2; }
+        to { opacity: 1;  }
+      }
+
       a:hover:before,
       a:hover:after {
         content: '🔥';
+        animation: fade-in 0.5s ease-out;
       }
 
       #header {
@@ -135,7 +145,7 @@ Check out my links to Github and Observable for (somewhat) more recent (and less
 
       var expandOuterInterval,
           innerToWireframeTimeout,
-          v = 0.02,
+          v = 0.04,
           scale = 1;
 
       function expandScale () {
