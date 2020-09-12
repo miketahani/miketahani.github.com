@@ -51,8 +51,7 @@
     }
 
     #links a:hover {
-      transition: 250ms padding, 250ms color, 250ms background;
-      /* padding: 2rem 1rem; */
+      transition: 250ms background;
       text-shadow: 2px 2px #000;
     }
   </style>
@@ -75,11 +74,9 @@
   <script>
     Array.from(document.querySelectorAll('#links a')).forEach(el => {
       el.addEventListener('mouseover', () => {
-        // el.style.color = '#000'
         el.style.background = `hsl(${Math.random() * 360 | 0}, 100%, 70%)`
       })
       el.addEventListener('mouseout', () => {
-        // el.style.color = '#fff'
         el.style.background = '#000'
       })
     })
