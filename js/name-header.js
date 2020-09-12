@@ -1,11 +1,17 @@
 (function () {
   const LARGE_TEXT = 'MIKE'
   const SUB_TEXT = 'TAHANI'
+  // const COLORS = [
+  //   '#FF0033',
+  //   '#0099FF',
+  //   '#00FF00',
+  //   '#FF9900'
+  // ]
   const COLORS = [
-    '#FF0033',
-    '#0099FF',
-    '#00FF00',
-    '#FF9900'
+    'hsl(0, 100%, 60%)',
+    'hsl(200, 100%, 60%)',
+    'hsl(150, 100%, 60%)',
+    'hsl(50, 100%, 60%)'
   ]
 
   const maxTravelDistance = 20
