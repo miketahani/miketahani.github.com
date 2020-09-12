@@ -25,6 +25,13 @@
       text-align: center;
     }
 
+    #root {
+      position: relative;
+      top: 0;
+      width: 75%;
+      margin: auto;
+    }
+
     #header {
       margin-top: 12vh;
     }
@@ -39,14 +46,14 @@
       text-decoration: none;
       background: #000;
       color: #fff;
+
       padding: 1rem;
     }
 
-    #root {
-      position: relative;
-      top: 0;
-      width: 75%;
-      margin: auto;
+    #links a:hover {
+      transition: 250ms padding, 250ms color, 250ms background;
+      /* padding: 2rem 1rem; */
+      text-shadow: 2px 2px #000;
     }
   </style>
 </head>
@@ -68,9 +75,13 @@
   <script>
     Array.from(document.querySelectorAll('#links a')).forEach(el => {
       el.addEventListener('mouseover', () => {
-        el.style.color = `hsl(${Math.random() * 360 | 0}, 100%, 70%)`
+        // el.style.color = '#000'
+        el.style.background = `hsl(${Math.random() * 360 | 0}, 100%, 70%)`
       })
-      el.addEventListener('mouseout', () => el.style.color = '#fff')
+      el.addEventListener('mouseout', () => {
+        // el.style.color = '#fff'
+        el.style.background = '#000'
+      })
     })
 
   </script>
