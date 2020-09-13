@@ -72,28 +72,29 @@
     ctx.globalAlpha = 0.5
     ctx.globalCompositeOperation = 'screen'
 
-    const ax = Math.sin(x * 0.01) // Next x angle, cached
-    const ay = Math.cos(y * 0.01) // Next y angle, cached
+    const ax = Math.sin(x * 0.01) // Next x angle
+    const ay = Math.cos(y * 0.01) // Next y angle
 
     for (let i = 0; i < len; i++) {
-      const direction = textDirections[i]
+      const [dx, dy] = textDirections[i]
       ctx.fillStyle = COLORS[i]
       ctx.fillText(
         LARGE_TEXT,
-        halfWidth + direction[0] * maxTravelDistance * ax,
-        halfHeight + LARGE_TEXT_Y_OFFSET + direction[1] * maxTravelDistance * ay
+        dx * maxTravelDistance * ax + halfWidth,
+        dy * maxTravelDistance * ay + halfHeight + LARGE_TEXT_Y_OFFSET
       )
     }
   }
 
-  window.addEventListener('mousemove', e => {
-    update(
-      e.clientX * 0.5 - window.innerWidth,
-      e.clientY * 0.5 - window.innerHeight
-    )
-  })
+  document.fonts.ready.then(() => {
+    window.addEventListener('mousemove', e => {
+      // Set (0, 0) at center of page
+      update(
+        e.clientX * 0.5 - window.innerWidth,
+        e.clientY * 0.5 - window.innerHeight
+      )
+    })
 
-  document.fonts.ready.then(_ => {
     update(halfWidth, halfHeight)
   })
 })();
