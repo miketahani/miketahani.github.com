@@ -72,14 +72,18 @@
     ctx.globalAlpha = 0.5
     ctx.globalCompositeOperation = 'screen'
 
-    const ax = Math.sin(x * 0.01) // Next x angle
-    const ay = Math.cos(y * 0.01) // Next y angle
+    // x and y angles, constricted to a small window
+    const ax = Math.cos(x * 0.01)
+    const ay = Math.sin(y * 0.01)
 
     for (let i = 0; i < len; i++) {
       const [dx, dy] = textDirections[i]
       ctx.fillStyle = COLORS[i]
       ctx.fillText(
         LARGE_TEXT,
+        // These are just parametric equations for a circle:
+        //   x = cx + r * cos(angle)
+        //   y = cy + r * sin(angle)
         dx * maxTravelDistance * ax + halfWidth,
         dy * maxTravelDistance * ay + halfHeight + LARGE_TEXT_Y_OFFSET
       )
