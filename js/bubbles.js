@@ -51,12 +51,7 @@
       this.generation = 0
       this.isDead = false
 
-      // let [seed1, seed2] = [rand(), rand()].sort((a, b) => a - b)
-      // this.seed1 = seed1
-      // this.seed2 = seed2
       this.seed = rand()
-
-
       this.maxSize = randFloor(15) + 3
     }
 
@@ -69,17 +64,6 @@
         return
       }
       super.tick()
-    }
-  }
-
-  // FIXME new CanvasConfig({  }), CanvasConfig extends Config
-  const config = {
-    fontSize: '500px',
-    fontFamily: 'Helvetica',
-    fontWeight: 'bold',
-    text: 'HELLO',
-    get font () {
-      return `${this.fontWeight} ${this.fontSize} ${this.fontFamily}`
     }
   }
 
@@ -98,7 +82,7 @@
   let bubbles = []
 
   function drawCoordinates ({ clientX: x, clientY: y }) {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
       const bubble = new AnimatedDyingBubble(x, y, maxGenerations, width, height, 2)
       bubbles.push(bubble)
     }
