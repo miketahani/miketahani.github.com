@@ -90,7 +90,7 @@
 
   function drawBubble ({ x, y, r, generation, seed, maxSize }) {
     const normGen = generation / maxGenerations
-    ctx.fillStyle = `hsl(${seed * 360}, 100%, ${100 - generation / maxGenerations * 40 + 20}%)`
+    ctx.fillStyle = `hsl(${seed * 360}, 100%, ${100 - normGen * 40 + 20}%)`
     ctx.beginPath()
     ctx.arc(x, y, normGen * maxSize + 1, 0, 2 * Math.PI)
     ctx.fill()
