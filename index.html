@@ -28,7 +28,7 @@
       margin: 0;
       padding: 0;
 
-      font-family: 'Helvetica';
+      font-family: Helvetica, Arial, sans-serif;
       font-weight: bold;
 
       text-align: center;
@@ -41,6 +41,10 @@
       margin: auto;
     }
 
+    #root > div {
+      padding: 1rem 0;
+    }
+
     #header {
       margin-top: 12vh;
     }
@@ -48,6 +52,16 @@
     #background {
       position: fixed;
       top: 0;
+    }
+
+    #info {
+      padding-bottom: 5rem !important;
+    }
+
+    #info > span {
+      font-family: 'ApercuPro';
+      font-size: 1.25rem;
+      text-shadow: 1px 1px #fff;
     }
 
     #links a, #links a:visited {
@@ -71,6 +85,12 @@
   <div id="background"></div>
   <div id="root">
     <div id="header"></div>
+
+    <div id="info">
+      <span>Creative Technologist</span><br>
+      <span>me@miketahani.com</span>
+    </div>
+
     <div id="links">
       <a href="https://blog.miketahani.com">Portfolio</a>
       <a href="https://github.com/miketahani">Github</a>
