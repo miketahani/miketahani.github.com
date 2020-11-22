@@ -20,8 +20,8 @@
   // const LARGE_TEXT_Y_OFFSET = -20 // for MXTX
   const LARGE_TEXT_Y_OFFSET = 0 // for MIKE
 
-  const width = 900
-  const height = 400
+  const width = 600
+  const height = 250
   const halfWidth = width / 2
   const halfHeight = height / 2
 
@@ -60,14 +60,14 @@
     ctx.globalCompositeOperation = 'source-over'
 
     ctx.fillStyle = 'black'
-    ctx.fillRect(width / 4, halfHeight - textHeight * 1.5, halfWidth, textHeight * 1.5)
+    ctx.fillRect(70, 10, 460, 155)
 
     ctx.font = 'bold 80px Helvetica'
-    ctx.fillText(SUB_TEXT, halfWidth, halfHeight + subTextHeight / 1.5)
+    ctx.fillText(SUB_TEXT, halfWidth, 235)
 
     ctx.font = '180px RoadRage'
     ctx.fillStyle = 'white'
-    ctx.fillText(LARGE_TEXT, halfWidth, halfHeight + LARGE_TEXT_Y_OFFSET)
+    ctx.fillText(LARGE_TEXT, halfWidth, 170)
 
     ctx.globalAlpha = 0.5
     ctx.globalCompositeOperation = 'screen'
@@ -85,7 +85,7 @@
         //   x = cx + r * cos(angle)
         //   y = cy + r * sin(angle)
         dx * maxTravelDistance * ax + halfWidth,
-        dy * maxTravelDistance * ay + halfHeight + LARGE_TEXT_Y_OFFSET
+        dy * maxTravelDistance * ay + 170
       )
     }
   }
