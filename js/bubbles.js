@@ -1,5 +1,5 @@
 (function () {
-
+  // Mover
   const twoPi = 2 * Math.PI;
   const rand = Math.random;
   const randFloor = max => rand() * max | 0;
@@ -67,16 +67,28 @@
     }
   }
 
-  const width = window.innerWidth
-  const height = window.innerHeight
+  // Sketch
+
+  let width, height
 
   const canvas = document.createElement('canvas')
-  canvas.width = width
-  canvas.height = height
   document.getElementById('background').append(canvas)
   const ctx = canvas.getContext('2d')
 
-  ctx.strokeStyle = 'rgba(0, 0, 0, 0.25)'
+  function resize () {
+    width = window.innerWidth
+    height = window.innerHeight
+    canvas.width = width
+    canvas.height = height
+
+    // Have to reset this, too
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.25)'
+  }
+
+  window.addEventListener('resize', resize)
+  resize()
+
+
 
   const maxGenerations = 70
   let bubbles = []
