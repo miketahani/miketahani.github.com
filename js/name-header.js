@@ -33,14 +33,6 @@
 
   ctx.textAlign = 'center'
 
-  ctx.font = '180px RoadRage'
-  const size = ctx.measureText(LARGE_TEXT)
-  const textHeight = size.actualBoundingBoxAscent - size.actualBoundingBoxDescent
-
-  ctx.font = 'bold 80px Helvetica'
-  const subSize = ctx.measureText(SUB_TEXT)
-  const subTextHeight = size.actualBoundingBoxAscent - size.actualBoundingBoxDescent
-
   // Will be multiplied by x and y coordinates to determine a direction of movement
   //  for each animated text block.
   // FIXME use bitshifting or something
