@@ -1,4 +1,4 @@
-(function () {
+module.exports = function initBubbles () {
   // Mover
   const twoPi = 2 * Math.PI;
   const rand = Math.random;
@@ -142,4 +142,4 @@
 
     bubbles = nextBubbles
   }
-})();
+}

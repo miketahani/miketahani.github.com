@@ -1,4 +1,4 @@
-(function () {
+module.exports = function initNameHeader () {
   const LARGE_TEXT = 'MIKE'
   const SUB_TEXT = 'TAHANI'
   // const COLORS = [
@@ -98,16 +98,4 @@
 
     update(halfWidth, halfHeight)
   })
-
-  // document.fonts.ready.then(() => {
-  //   window.addEventListener('mousemove', e => {
-  //     // Set (0, 0) at center of page
-  //     update(
-  //       e.clientX * 0.5 - window.innerWidth,
-  //       e.clientY * 0.5 - window.innerHeight
-  //     )
-  //   })
-
-  //   update(halfWidth, halfHeight)
-  // })
-})();
+}
