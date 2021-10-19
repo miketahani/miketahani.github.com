@@ -20,7 +20,14 @@
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",
+    "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "babel-loader": "^8.2.2",
     "webpack-cli": "^4.9.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.15.4",
+    "core-js": "^3.18.3",
+    "regenerator-runtime": "^0.13.9"
   }
 }

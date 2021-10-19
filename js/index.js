@@ -1,3 +1,5 @@
+require('core-js/stable')
+require('regenerator-runtime/runtime')
 const initBubbles = require('./bubbles.js')
 const initNameHeader = require('./name-header.js')
 
