@@ -130,8 +130,8 @@ This site was written in 2014.
       //   wireframe: true,
       // });
       const innerMaterial = new THREE.MeshStandardMaterial({
-        color: 0x000000,
-        wireframe: true,
+        color: 0xffffff,
+        // wireframe: true,
         metalness: 0.5,
         roughness: 0.5,
       });
@@ -202,8 +202,8 @@ This site was written in 2014.
       }
 
       function innerToWireframe() {
-        inner.material.color.set(0x000000);
-        inner.material.wireframe = true;
+        inner.material.color.set(0xffffff);
+        // inner.material.wireframe = true;
 
         window.clearInterval(expandOuterInterval);
         expandOuterInterval = window.setInterval(contractOuter, 0);
