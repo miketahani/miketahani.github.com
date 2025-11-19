@@ -1,122 +1,237 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+
+
+ /$$      /$$  /$$$$$$  /$$$$$$$  /$$   /$$ /$$$$$$ /$$   /$$  /$$$$$$
+| $$  /$ | $$ /$$__  $$| $$__  $$| $$$ | $$|_  $$_/| $$$ | $$ /$$__  $$
+| $$ /$$$| $$| $$  \ $$| $$  \ $$| $$$$| $$  | $$  | $$$$| $$| $$  \__/
+| $$/$$ $$ $$| $$$$$$$$| $$$$$$$/| $$ $$ $$  | $$  | $$ $$ $$| $$ /$$$$
+| $$$$_  $$$$| $$__  $$| $$__  $$| $$  $$$$  | $$  | $$  $$$$| $$|_  $$
+| $$$/ \  $$$| $$  | $$| $$  \ $$| $$\  $$$  | $$  | $$\  $$$| $$  \ $$
+| $$/   \  $$| $$  | $$| $$  | $$| $$ \  $$ /$$$$$$| $$ \  $$|  $$$$$$/
+|__/     \__/|__/  |__/|__/  |__/|__/  \__/|______/|__/  \__/ \______/
+
+
+This site was written in 2014.
+-->
 <html>
-<head>
-  <meta charset="utf8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <meta name="description" content="Mike Tahani is a full-stack, creative technologist specializing in experimental data visualization.">
-  <title>MIKE TAHANI</title>
-  <link rel="preload" href="fonts/RoadRage.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/ApercuPro-Mono.woff2" as="font" type="font/woff2" crossorigin>
-  <style>
-    @font-face {
-      font-family: 'RoadRage';
-      src: url('fonts/RoadRage.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <title>mike tahani</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-    @font-face {
-      font-family: 'ApercuPro';
-      src: url('fonts/ApercuPro-Mono.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
+      body {
+        font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+        font-size: 1.5em;
+        margin: 20px;
+      }
 
-    * {
-      box-sizing: border-box;
-    }
+      #threed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
 
-    body, #root {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
+      a {
+        padding: 0 1px;
+      }
 
-      font-family: Helvetica, Arial, sans-serif;
-      font-weight: bold;
+      a,
+      a:visited {
+        text-decoration: none;
+        background: #000;
+        color: #fff;
+        line-height: 1.3em;
+      }
 
-      text-align: center;
-    }
+      @keyframes fade-in {
+        from {
+          opacity: 0.2;
+        }
+        to {
+          opacity: 1;
+        }
+      }
 
-    #root {
-      position: relative;
-      top: 0;
-      width: 75%;
-      margin: auto;
-    }
+      a:hover:before,
+      a:hover:after {
+        content: "🔥";
+        animation: fade-in 0.5s ease-out;
+      }
 
-    #root > div {
-      padding: 1rem 0;
-    }
+      #header {
+        font-size: 2em;
+      }
 
-    #header {
-      margin-top: 12vh;
-    }
+      #links {
+        margin-top: 1em;
+      }
 
-    #background {
-      position: fixed;
-      top: 0;
-    }
+      .smaller {
+        font-size: 0.7em;
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div id="header">Mike Tahani</div>
+      Creative Technologist 💡
 
-    #info {
-      padding-bottom: 5rem !important;
-    }
+      <div id="links">
+        <a href="https://beta.observablehq.com/@miketahani">Notebooks</a><br />
+        <a href="https://blog.miketahani.com">Portfolio</a><br />
+        <a href="https://github.com/miketahani">Github</a><br />
+        <a href="https://vimeo.com/miketahani">Videos</a><br />
+        <a href="https://www.linkedin.com/in/miketahani/">LinkedIn</a>
+      </div>
 
-    h2 {
-      margin: 0;
-      padding: 0;
-      font-family: 'ApercuPro';
-      font-size: 1.25rem;
-      text-shadow: 1px 1px #fff;
-    }
-
-    .links a, .links a:visited {
-      font-family: 'ApercuPro', 'Courier New', Courier, monospace;
-      font-size: 2rem;
-      text-decoration: none;
-      background: #000;
-      color: #fff;
-
-      padding: 1rem;
-      line-height: 2.5;
-    }
-
-    .links a:hover {
-      transition: 250ms background;
-      text-shadow: 2px 2px #000;
-    }
-  </style>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47985420-1"></script>
-</head>
-<body>
-  <div id="background"></div>
-  <div id="root">
-    <div id="header"></div>
-
-    <div id="info">
-      <h2>Creative Technologist</h2>
-      <h2>me@miketahani.com</h2>
+      <div class="smaller">say hi: hi@miketahani.com</div>
     </div>
 
-    <div class="links">
-      <a href="https://blog.miketahani.com">Portfolio</a>
-      <a href="https://observablehq.com/@miketahani">Notebooks</a>
-      <a href="https://vimeo.com/miketahani">Videos</a>
-      <a href="https://github.com/miketahani">Code</a>
-      <a href="https://www.linkedin.com/in/miketahani/">LinkedIn</a>
-    </div>
-  </div>
+    <div id="threed"></div>
 
-  <script src="./build/bundle.js"></script>
+    <script src="js/vendor/three.r91.min.js"></script>
+    <script>
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(
+        45,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
 
-  <!-- google analytics -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-47985420-1');
-  </script>
-</body>
+      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0xffffff);
+      document.getElementById("threed").appendChild(renderer.domElement);
+
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(1, 1, 1);
+      scene.add(light);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+
+      var geometry = new THREE.IcosahedronGeometry();
+      // var material = new THREE.MeshBasicMaterial({
+      //   color: 0x000000,
+      //   wireframe: true,
+      // });
+      const innerMaterial = new THREE.MeshStandardMaterial({
+        color: 0x000000,
+        wireframe: true,
+        metalness: 0.5,
+        roughness: 0.5,
+      });
+      var inner = new THREE.Mesh(geometry, innerMaterial);
+      scene.add(inner);
+
+      var geometry = new THREE.IcosahedronGeometry(2);
+      var material = new THREE.MeshBasicMaterial({
+        color: 0x000000,
+        wireframe: true,
+      });
+      var outer = new THREE.Mesh(geometry, material);
+      scene.add(outer);
+
+      camera.position.z = 5;
+
+      var clock = new THREE.Clock();
+
+      var render = function () {
+        requestAnimationFrame(render);
+
+        const d = clock.getDelta();
+
+        inner.rotation.x += 0.5 * d;
+        inner.rotation.y += 0.5 * d;
+
+        outer.rotation.x -= 0.25 * d;
+        outer.rotation.y -= 0.25 * d;
+
+        renderer.render(scene, camera);
+      };
+
+      render();
+
+      var expandOuterInterval,
+        innerToWireframeTimeout,
+        v = 20,
+        scale = 1;
+
+      function expandScale() {
+        const d = clock.getDelta();
+        if (scale < 2) {
+          scale += v * d;
+        } else {
+          window.clearInterval(expandOuterInterval);
+          scale = 3;
+        }
+      }
+
+      function contractScale() {
+        const d = clock.getDelta();
+        if (scale > 1) {
+          scale -= v * d;
+        } else {
+          window.clearInterval(expandOuterInterval);
+          scale = 1;
+        }
+      }
+
+      function expandOuter() {
+        expandScale();
+        outer.scale.set(scale, scale, scale);
+      }
+
+      function contractOuter() {
+        contractScale();
+        outer.scale.set(scale, scale, scale);
+      }
+
+      function innerToWireframe() {
+        inner.material.color.set(0x000000);
+        inner.material.wireframe = true;
+
+        window.clearInterval(expandOuterInterval);
+        expandOuterInterval = window.setInterval(contractOuter, 0);
+      }
+
+      console.log(outer.scale, inner.scale);
+
+      Array.from(document.querySelectorAll("div#links > a")).forEach(function (
+        a
+      ) {
+        a.addEventListener("mouseover", function () {
+          window.clearInterval(expandOuterInterval);
+
+          if (innerToWireframeTimeout) {
+            window.clearTimeout(innerToWireframeTimeout);
+          }
+
+          const hue = Math.random();
+
+          inner.material.color.setHSL(hue, 1.0, 0.65);
+          inner.material.wireframe = false;
+
+          this.style.color = `hsl(${hue * 360}, 100%, 65%)`;
+
+          expandOuterInterval = window.setInterval(expandOuter, 0);
+        });
+
+        a.addEventListener("mouseout", function () {
+          this.style.color = "#fff";
+          innerToWireframeTimeout = window.setTimeout(innerToWireframe, 100);
+        });
+      });
+    </script>
+  </body>
 </html>
