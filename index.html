@@ -105,15 +105,18 @@ This site was written in 2014.
 
     <script src="js/vendor/three.r91.min.js"></script>
     <script>
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
         45,
         window.innerWidth / window.innerHeight,
         0.1,
         100
       );
 
-      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff);
       document.getElementById("threed").appendChild(renderer.domElement);
@@ -124,33 +127,36 @@ This site was written in 2014.
       const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
       scene.add(ambientLight);
 
-      var geometry = new THREE.IcosahedronGeometry();
-      // var material = new THREE.MeshBasicMaterial({
-      //   color: 0x000000,
-      //   wireframe: true,
-      // });
       const innerMaterial = new THREE.MeshStandardMaterial({
         color: 0xffffff,
-        // wireframe: true,
         metalness: 0.5,
         roughness: 0.5,
       });
-      var inner = new THREE.Mesh(geometry, innerMaterial);
+      const inner = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(),
+        innerMaterial
+      );
       scene.add(inner);
 
-      var geometry = new THREE.IcosahedronGeometry(2);
-      var material = new THREE.MeshBasicMaterial({
+      const outerMaterial = new THREE.MeshBasicMaterial({
         color: 0x000000,
         wireframe: true,
       });
-      var outer = new THREE.Mesh(geometry, material);
+      const outer = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(2),
+        outerMaterial
+      );
       scene.add(outer);
 
       camera.position.z = 5;
 
-      var clock = new THREE.Clock();
+      const clock = new THREE.Clock();
+      let targetScale = 1;
+      let currentScale = 1;
+      let innerToWireframeTimeout;
+      const scaleSpeed = 20;
 
-      var render = function () {
+      const render = () => {
         requestAnimationFrame(render);
 
         const d = clock.getDelta();
@@ -161,79 +167,40 @@ This site was written in 2014.
         outer.rotation.x -= 0.25 * d;
         outer.rotation.y -= 0.25 * d;
 
+        if (Math.abs(currentScale - targetScale) > 0.01) {
+          const dir = targetScale > currentScale ? 1 : -1;
+          currentScale += dir * scaleSpeed * d;
+          currentScale = Math.max(1, Math.min(3, currentScale));
+          outer.scale.set(currentScale, currentScale, currentScale);
+        }
+
         renderer.render(scene, camera);
       };
 
       render();
 
-      var expandOuterInterval,
-        innerToWireframeTimeout,
-        v = 20,
-        scale = 1;
-
-      function expandScale() {
-        const d = clock.getDelta();
-        if (scale < 2) {
-          scale += v * d;
-        } else {
-          window.clearInterval(expandOuterInterval);
-          scale = 3;
-        }
-      }
-
-      function contractScale() {
-        const d = clock.getDelta();
-        if (scale > 1) {
-          scale -= v * d;
-        } else {
-          window.clearInterval(expandOuterInterval);
-          scale = 1;
-        }
-      }
-
-      function expandOuter() {
-        expandScale();
-        outer.scale.set(scale, scale, scale);
-      }
-
-      function contractOuter() {
-        contractScale();
-        outer.scale.set(scale, scale, scale);
-      }
-
-      function innerToWireframe() {
+      const resetInner = () => {
         inner.material.color.set(0xffffff);
-        // inner.material.wireframe = true;
+        targetScale = 1;
+      };
 
-        window.clearInterval(expandOuterInterval);
-        expandOuterInterval = window.setInterval(contractOuter, 0);
-      }
-
-      console.log(outer.scale, inner.scale);
-
-      Array.from(document.querySelectorAll("div#links > a")).forEach(function (
-        a
-      ) {
-        a.addEventListener("mouseover", function () {
-          window.clearInterval(expandOuterInterval);
-
+      document.querySelectorAll("div#links > a").forEach((link) => {
+        link.addEventListener("mouseover", function () {
           if (innerToWireframeTimeout) {
-            window.clearTimeout(innerToWireframeTimeout);
+            clearTimeout(innerToWireframeTimeout);
           }
 
           const hue = Math.random();
-
           inner.material.color.setHSL(hue, 1.0, 0.65);
           inner.material.wireframe = false;
-
           this.style.color = `hsl(${hue * 360}, 100%, 65%)`;
 
-          expandOuterInterval = window.setInterval(expandOuter, 0);
+          targetScale = 3;
         });
 
-        a.addEventListener("mouseout", function () {
+        link.addEventListener("mouseout", function () {
           this.style.color = "#fff";
-          innerToWireframeTimeout = window.setTimeout(innerToWireframe, 100);
+          innerToWireframeTimeout = setTimeout(resetInner, 100);
         });
       });
     </script>
