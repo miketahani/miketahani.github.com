@@ -91,14 +91,14 @@ This site was written in 2014.
       Creative Technologist 💡
 
       <div id="links">
-        <a href="https://beta.observablehq.com/@miketahani">Notebooks</a><br />
-        <a href="https://blog.miketahani.com">Portfolio</a><br />
+        <a href="https://observablehq.com/@miketahani">Notebooks & Experiments</a><br />
+        <a href="https://blog.miketahani.com">Portfolio (defunct)</a><br />
         <a href="https://github.com/miketahani">Github</a><br />
         <a href="https://vimeo.com/miketahani">Videos</a><br />
-        <a href="https://www.linkedin.com/in/miketahani/">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/miketahani/">Work</a>
       </div>
 
-      <div class="smaller">say hi: hi@miketahani.com</div>
+      <div class="smaller">👋 hi@miketahani.com</div>
     </div>
 
     <div id="threed"></div>
@@ -115,10 +115,9 @@ This site was written in 2014.
 
       const renderer = new THREE.WebGLRenderer({
         antialias: true,
-        alpha: true,
       });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0xffffff);
+      renderer.setClearColor(0xffffff, 1);
       document.getElementById("threed").appendChild(renderer.domElement);
 
       const light = new THREE.DirectionalLight(0xffffff, 1);
